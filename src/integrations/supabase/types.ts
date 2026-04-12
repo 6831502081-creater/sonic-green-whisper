@@ -14,7 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      decibel_readings: {
+        Row: {
+          db_level: number
+          id: string
+          recorded_at: string
+          status: string
+        }
+        Insert: {
+          db_level: number
+          id?: string
+          recorded_at?: string
+          status: string
+        }
+        Update: {
+          db_level?: number
+          id?: string
+          recorded_at?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
