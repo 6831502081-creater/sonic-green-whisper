@@ -6,15 +6,15 @@
 #include "time.h"
 
 // --- ตั้งค่า Wi-Fi ---
-const char* ssid     = "Nongyut";
-const char* password = "YEARYOYO111";
+const char* ssid     = "Yoyo";
+const char* password = "xvnz0523";
 
 // --- ตั้งค่าเวลา (NTP) ---
 const char* ntpServer = "pool.ntp.org";
 const long  gmtOffset_sec = 7 * 3600; // Thailand GMT+7
 const int   daylightOffset_sec = 0;
 
-// --- ตั้งค่า Lovable Cloud Edge Function ---
+// --- ☁️ ตั้งค่า Lovable Cloud Edge Function ---
 const char* edgeFunctionURL = "https://fvvhmdqwhihglgbqrojk.supabase.co/functions/v1/ingest";
 const char* anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2dmhtZHF3aGloZ2xnYnFyb2prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5Njg2NDQsImV4cCI6MjA5MTU0NDY0NH0.eGxAIr_jZHHPiEvt3ascKE45ZyXWEGhIHVktFZc42uE";
 
@@ -40,7 +40,7 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\nWiFi Connected!");
+  Serial.println("\n✅ WiFi Connected!");
 
   // ตั้งค่าเวลาให้ตรงกับไทย
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
@@ -53,6 +53,7 @@ void setup() {
   display.setTextColor(SSD1306_WHITE);
 }
 
+// --- ☁️ ฟังก์ชันส่งข้อมูลขึ้น Cloud ---
 void uploadToCloud(float db, String status) {
   if (WiFi.status() != WL_CONNECTED) return;
 
@@ -62,7 +63,6 @@ void uploadToCloud(float db, String status) {
   http.addHeader("apikey", anonKey);
   http.addHeader("Authorization", String("Bearer ") + anonKey);
 
-  // สร้าง JSON payload
   String json = "{\"db_level\":" + String(db, 1) + ",\"status\":\"" + status + "\"}";
 
   int httpCode = http.POST(json);
@@ -107,7 +107,7 @@ void loop() {
   else if (db < 55) status = "Normal";
   else status = "Loud";
 
-  // --- Serial Monitor ---
+  // --- 📟 Serial Monitor ---
   Serial.println("-------------------------");
   Serial.print("1. Noise: "); Serial.print((int)db); Serial.println(" dB");
   Serial.print("2. Status: "); Serial.println(status);
@@ -115,7 +115,7 @@ void loop() {
   Serial.println(&timeinfo, "%d/%m/%Y %H:%M:%S");
   Serial.println("-------------------------");
 
-  // --- แสดงบน OLED ---
+  // --- 📺 OLED ---
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
