@@ -6,8 +6,8 @@
 #include "time.h"
 
 // --- ตั้งค่า Wi-Fi ---
-const char* ssid     = "Yoyo";
-const char* password = "xvnz0523";
+const char* ssid     = "IOT";
+const char* password = "mfuiot2023";
 
 // --- ตั้งค่าเวลา (NTP) ---
 const char* ntpServer = "pool.ntp.org";
